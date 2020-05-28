@@ -8,8 +8,18 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@xstate/react": "^0.8.1",
+    "emotion-theming": "^10.0.27",
+    "miragejs": "^0.1.40",
     "next": "9.4.2",
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "react-query": "^1.5.3",
+    "react-query-devtools": "^1.1.5",
+    "react-table": "^7.1.0",
+    "xstate": "^4.10.0"
   }
 }

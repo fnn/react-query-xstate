@@ -1,9 +1,27 @@
 import { Server, JSONAPISerializer, Model } from 'miragejs';
 
+// Let's create our makeServer function and export it so we can provide ourselves the opportunity to use Mirage in our UI or any tests your future self may want to write
+
 export function makeServer({ environment = "test" } = {}) {
+  /*
+    First we'll need to create our server instance using Server from MirageJS
+
+    The MirageJS server intercepts any XMLHttpRequest or fetch requests your Javascript app makes and lets you mock the response.
+
+    We'll want our server to be aware of the environent it's being invoked it and then start definiing what makes up our Server.
+
+    - Something to note about a MirageJS server is that instead of interacting with the data directly, you interface with the ORM layer built on top of where your data is
+      stored. 
+
+  */
   let server = new Server({
     environment,
 
+    /*
+      Models let our route handlers take advantage of Mirag's in-memory database. The database makes our route handlers dynamic, so we can change the data that's returned
+      without having to rewrite the handler. 
+      
+    */
     models: {
       user: Model
     },

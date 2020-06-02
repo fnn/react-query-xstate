@@ -18,37 +18,54 @@ export function makeServer({ environment = "test" } = {}) {
     environment,
 
     /*
-      Models let our route handlers take advantage of Mirag's in-memory database. The database makes our route handlers dynamic, so we can change the data that's returned
+      Models let our route handlers take advantage of Mirage's in-memory database. The database makes our route handlers dynamic, so we can change the data that's returned
       without having to rewrite the handler. 
-      
+
     */
     models: {
       user: Model
     },
 
+    /*
+      Serializers let you customize the formatting logic of your responses, without having to change your route handlers, models, relationships, or any other part of your
+      Mirage setup.
+
+      The JSONAPISerializer is one of the few named serializers shipped with Mirage out of the box. 
+
+      We now have a data shape being returned that will directly mirrror how we'll expect to use it in the UI. 
+
+    */
     serializers: {
       application: JSONAPISerializer,
     },
+
+    /*
+      Thankfully creating a seeded database can be extremely easy because of the seeds method.
+
+      If you want to explicitly create the object you'll be interacting with as responses, you can use the server.create function.
+      With server.create, you'll want to provide two arguments. 
+
+    */
 
     seeds(server) {
       server.create("user", { name: "Daniel", email: "daniel@gmail.com", password: "12345", createdAt: new Date() })
       server.create("user", { name: "Julian", email: "julian@gmail.com", password: "12345", createdAt: new Date() })
       server.create("user", { name: "Jimmy", email: "jimmy@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Rebecca", email: "rebecca@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Dominique", email: "dominique@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Danielle", email: "Danielle@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Juwan", email: "juwan@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Imani", email: "imani@gmail.com", password: "12345", createdAt: new Date() })
-      server.create("user", { name: "Louis", email: "louis@gmail.com", password: "12345", createdAt: new Date() })
     },
 
     routes() {
       this.namespace = "api"
 
       this.get("/users", schema => schema.users.all())
+
       this.get("/user/:id", (schema, request) => {
         let id = request.params.id;
         return schema.movies.find(id);
+      })
+
+      this.post("/user/create", (schema) => {
+        const newUser = request.params.user
+        return schema.movies.create(newUser);
       })
     }
   })

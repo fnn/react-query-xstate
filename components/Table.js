@@ -32,8 +32,13 @@ export default function Table({ columns, data }) {
           return (
             <tr {...row.getRowProps()}>
               {row.cells.map(cell => {
-                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                return <td {...cell.getCellProps()}>
+                  {cell.render('Cell')}
+
+                </td>
               })}
+              <button>Delete</button>
+              <button>Edit</button>
             </tr>
           )
         })}

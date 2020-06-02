@@ -8,6 +8,18 @@ export default function Index() {
     return users.data;
   })
 
+  /* 
+    Create a useMutation that lets us hit our create endpoint and create a new user. 
+    We can feed it dummy data first, then wire it up to a form
+    
+    We will explore utilizing the queryCache to optimistically update our table 
+    
+    TODO: 
+    [] useMutation hits our POST in Mirage
+    [] useMutation updates the queryCache, thus updating the UI
+
+  */
+
   const columns = React.useMemo(
     () => [
       {
@@ -32,6 +44,7 @@ export default function Index() {
 
   return (
     <div>
+      <button>Create +</button>
       <Table columns={columns} data={users} />
     </div>
   )

@@ -1,5 +1,6 @@
 import { makeServer } from '../mirage';
-import { ThemeProvider, CSSReset, Flex } from "@chakra-ui/core";
+
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 if (process.env.NODE_ENV === "development") {
   makeServer({ environment: "development" })
@@ -7,11 +8,9 @@ if (process.env.NODE_ENV === "development") {
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <ThemeProvider>
-      <CSSReset />
-      <Flex margin="16px" direction="column" justifyContent="space-between">
-        <Component {...pageProps} />
-      </Flex >
-    </ThemeProvider>
+    <div>
+      <CssBaseline />
+      <Component {...pageProps} />
+    </div>
   )
 }

@@ -9,7 +9,30 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Button from '@material-ui/core/Button';
 
-export default function Table({ columns, data }) {
+export default function Table({ data }) {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: "ID",
+        accessor: 'id'
+      },
+
+      {
+        Header: 'Name',
+        accessor: 'attributes.name',
+      },
+      {
+        Header: 'Email',
+        accessor: 'attributes.email',
+      },
+      {
+        Header: 'Account Created',
+        accessor: 'attributes.created-at',
+      },
+    ],
+    []
+  )
+
   // Use the state and functions returned from useTable to build your UI
   const {
     getTableProps,

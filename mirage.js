@@ -60,12 +60,18 @@ export function makeServer({ environment = "test" } = {}) {
 
       this.get("/user/:id", (schema, request) => {
         let id = request.params.id;
-        return schema.movies.find(id);
+        return schema.users.find(id);
       })
 
-      this.post("/user/create", (schema) => {
-        const newUser = request.params.user
-        return schema.movies.create(newUser);
+      this.post("/user/create", (schema, request) => {
+        const newUser = request.requestBody
+        return schema.users.create({ ...newUser });
+      });
+
+      this.del("/user/delete/:id", (schema, request) => {
+        const id = request.params.id;
+        const user = schema.users.find(id);
+        return user.destroy();
       })
     }
   })
